@@ -12,6 +12,9 @@ public class Mammoccio : MonoBehaviour
     float AngleDx = 0;
     float lastAngleDx = 0;
     public float currentVersDx = 0;
+
+    public float force = 30f;
+    public float applyRightDist = 10f;
 	// Use this for initialization
 	void Start () {
 	
@@ -19,12 +22,27 @@ public class Mammoccio : MonoBehaviour
 
     float lastUpdate = 0;
 	void Update () {
-        if (lastUpdate == 0 || Time.time - lastUpdate > 0.2f)
+        if (lastUpdate == 0 || Time.time - lastUpdate > 0.1f)
         {
             lastUpdate = Time.time;
 
             this.checkRotation();
+            Vector3 dir = Vector3.zero;
 
+            if (this.currentVersSx > 0.2f)
+            {
+               // dir += (this.transform.forward - this.transform.right) * force;
+                this.rigidbody.AddForceAtPosition(this.transform.forward * force, this.transform.forward + this.transform.position - this.transform.right * applyRightDist);
+            }
+
+            if (this.currentVersDx > 0.2f)
+            {
+                //dir += (this.transform.forward + this.transform.right) * force;
+                this.rigidbody.AddForceAtPosition(this.transform.forward * force, this.transform.forward + this.transform.position + this.transform.right * applyRightDist);
+            }
+
+            //this.rigidbody.AddForce(dir);
+            
         }
         
 	}
