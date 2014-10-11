@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 
 public class Mammoccio : MonoBehaviour 
@@ -7,20 +8,27 @@ public class Mammoccio : MonoBehaviour
 
     float AngleSx=0;
     float lastAngleSx= 0;
-    public float currentVersSx = 0;
-
+    float currentVersSx = 0;
     float AngleDx = 0;
     float lastAngleDx = 0;
-    public float currentVersDx = 0;
+    float currentVersDx = 0;
 
     public float force = 30f;
     public float applyRightDist = 10f;
-	// Use this for initialization
-	void Start () {
-	
-	}
+
+    public Transform bardasciaTarget;
+    public float MaxBardasciaRotation = 20;
+    public float BardasciaRotationPerSecond = 50f;
+    public Transform scudoTarget;
 
     float lastUpdate = 0;
+
+    Vector3 startBardasciaDir;
+    void Start()
+    {
+        startBardasciaDir = bardasciaTarget.forward;
+    }
+
 	void Update () {
         if (lastUpdate == 0 || Time.time - lastUpdate > 0.1f)
         {
@@ -31,20 +39,15 @@ public class Mammoccio : MonoBehaviour
 
             if (this.currentVersSx > 0.2f)
             {
-               // dir += (this.transform.forward - this.transform.right) * force;
                 this.rigidbody.AddForceAtPosition(this.transform.forward * force, this.transform.forward + this.transform.position - this.transform.right * applyRightDist);
             }
 
             if (this.currentVersDx > 0.2f)
             {
-                //dir += (this.transform.forward + this.transform.right) * force;
                 this.rigidbody.AddForceAtPosition(this.transform.forward * force, this.transform.forward + this.transform.position + this.transform.right * applyRightDist);
             }
-
-            //this.rigidbody.AddForce(dir);
-            
         }
-        
+        this.CheckBardasciaRotation();
 	}
     private void checkRotation()
     {
@@ -66,9 +69,59 @@ public class Mammoccio : MonoBehaviour
 
         this.lastAngleDx = this.AngleDx;
     }
+    public void CheckScudoPosition()
+    {
+        float y = 0;
+        float x = 0;
+        if (GetButton(this.playerNum, ButtonMapping.BUTTON_A))
+            y += 1;
+        if (GetButton(this.playerNum, ButtonMapping.BUTTON_B))
+            x += 1;
+        if (GetButton(this.playerNum, ButtonMapping.BUTTON_X))
+            x -= 1;
+        if (GetButton(this.playerNum, ButtonMapping.BUTTON_Y))
+            y -= 1;
+
+    }
+    Vector3 targetBardasciaRotation=Vector3.zero;
+    public void CheckBardasciaRotation()
+    {
+        float y = 0;
+        float x = 0;
+
+        if (GetButton(this.playerNum, ButtonMapping.BUTTON_A))
+            y += 1;
+        if (GetButton(this.playerNum, ButtonMapping.BUTTON_B))
+            x += 1;
+        if (GetButton(this.playerNum, ButtonMapping.BUTTON_X))
+            x -= 1;
+        if (GetButton(this.playerNum, ButtonMapping.BUTTON_Y))
+			y -= 1;
+
+        targetBardasciaRotation = new Vector3(Mathf.Clamp(targetBardasciaRotation.x + y * BardasciaRotationPerSecond * Time.deltaTime, -MaxBardasciaRotation, MaxBardasciaRotation), Mathf.Clamp(targetBardasciaRotation.y + x * BardasciaRotationPerSecond * Time.deltaTime, -MaxBardasciaRotation, MaxBardasciaRotation), 0);
+
+
+        bardasciaTarget.transform.localRotation = Quaternion.Lerp(bardasciaTarget.transform.localRotation, Quaternion.Euler(targetBardasciaRotation), 0.2f);
+
+    }
+
     public static float GetAxisValue(int playerNumber, AxesMapping axisName)
     {
         return Input.GetAxis(playerNumber + "_Axis" + (int)axisName);
+
+    }
+    protected bool GetButton(int playerNumber, ButtonMapping buttonName)
+    {
+        return Input.GetKey(BToCode(playerNumber, buttonName));
+    }
+    public static bool GetButtonDown(int playerNumber, ButtonMapping buttonName)
+	{
+		return Input.GetKeyDown(BToCode(playerNumber, buttonName));
+	}
+    protected static KeyCode BToCode(int playerNumber, ButtonMapping buttonName)
+    {
+        playerNumber++; //1-based
+        return (KeyCode)Enum.Parse(typeof(KeyCode), "Joystick" + playerNumber + "Button" + (int)buttonName);
     }
 }
 
