@@ -48,6 +48,8 @@ public class Mammoccio : MonoBehaviour
             }
         }
         this.CheckBardasciaRotation();
+        this.CheckScudoPosition();
+
 	}
     private void checkRotation()
     {
@@ -82,24 +84,70 @@ public class Mammoccio : MonoBehaviour
         if (GetButton(this.playerNum, ButtonMapping.BUTTON_Y))
             y -= 1;
 
+
     }
+    float lastDpadInput = 0;
     Vector3 targetBardasciaRotation=Vector3.zero;
     public void CheckBardasciaRotation()
     {
         float y = 0;
         float x = 0;
 
-        if (GetButton(this.playerNum, ButtonMapping.BUTTON_A))
-            y += 1;
-        if (GetButton(this.playerNum, ButtonMapping.BUTTON_B))
-            x += 1;
-        if (GetButton(this.playerNum, ButtonMapping.BUTTON_X))
-            x -= 1;
-        if (GetButton(this.playerNum, ButtonMapping.BUTTON_Y))
-			y -= 1;
+#if UNITY_STANDALONE_WIN
+        //Su windows è necessario un controllo più raffinato sull'input
+        if (GetAxisValue(this.playerNum, AxesMapping.DPAD_Y) > 0.1f)
+        {
+            if (lastDpadInput == 0 || (Time.time - lastDpadInput) > 0.2f)
+            {
+                lastDpadInput = Time.time;
+                y += 1;
+            }
+        }
+        if (GetAxisValue(this.playerNum, AxesMapping.DPAD_Y) < -0.1f)
+        {
+            if (lastDpadInput == 0 || (Time.time - lastDpadInput) > 0.2f)
+            {
+                lastDpadInput = Time.time;
+                y -= 1;
+            }
+        }
+        if (GetAxisValue(this.playerNum, AxesMapping.DPAD_X) > 0.1f)
+        {
+            if (lastDpadInput == 0 || (Time.time - lastDpadInput) > 0.2f)
+            {
+                lastDpadInput = Time.time;
+                x += 1;
+            }
+        }
+        if (GetAxisValue(this.playerNum, AxesMapping.DPAD_X) < -0.1f)
+        {
+            if (lastDpadInput == 0 || (Time.time - lastDpadInput) > 0.2f)
+            {
+                lastDpadInput = Time.time;
+                x -= 1;
+            }
+        }
+#elif UNITY_STANDALONE_OSX
+			//Moving the highlight
+			if(InputManager.GetButtonDown(this.playerNum, ButtonMapping.DPAD_UP))
+			{
+				y += 1;
+			}
+			if(InputManager.GetButtonDown(this.playerNum, ButtonMapping.DPAD_DOWN))
+			{
+				y -= 1;
+			}
+			if(InputManager.GetButtonDown(this.playerNum, ButtonMapping.DPAD_LEFT))
+			{
+				 x += 1;
+			}
+			if(InputManager.GetButtonDown(this.playerNum, ButtonMapping.DPAD_RIGHT))
+			{
+				x -= 1;
+			}
+#endif
 
         targetBardasciaRotation = new Vector3(Mathf.Clamp(targetBardasciaRotation.x + y * BardasciaRotationPerSecond * Time.deltaTime, -MaxBardasciaRotation, MaxBardasciaRotation), Mathf.Clamp(targetBardasciaRotation.y + x * BardasciaRotationPerSecond * Time.deltaTime, -MaxBardasciaRotation, MaxBardasciaRotation), 0);
-
 
         bardasciaTarget.transform.localRotation = Quaternion.Lerp(bardasciaTarget.transform.localRotation, Quaternion.Euler(targetBardasciaRotation), 0.2f);
 
@@ -108,7 +156,6 @@ public class Mammoccio : MonoBehaviour
     public static float GetAxisValue(int playerNumber, AxesMapping axisName)
     {
         return Input.GetAxis(playerNumber + "_Axis" + (int)axisName);
-
     }
     protected bool GetButton(int playerNumber, ButtonMapping buttonName)
     {
