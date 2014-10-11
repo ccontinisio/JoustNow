@@ -1,0 +1,167 @@
+fileFormatVersion: 2
+guid: 0c2e25b6bc53d438c8247f0b7cec7527
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Barile
+    100002: Body
+    100004: Braccio
+    100006: //RootNode
+    100008: Cingolo
+    100010: Coda
+    100012: Cube.011
+    100014: Cube.012
+    100016: Cube.013
+    100018: elmo
+    100020: Gamba
+    100022: Gamba avanti
+    100024: Gamba.001
+    100026: GambaDietroDown
+    100028: GambadietroUP
+    100030: GambaPiede
+    100032: GambaPiede.001
+    100034: Lancia
+    100036: scudo
+    100038: Testa
+    100040: Wheel
+    100042: Wheel.001
+    400000: Barile
+    400002: Body
+    400004: Braccio
+    400006: //RootNode
+    400008: Cingolo
+    400010: Coda
+    400012: Cube.011
+    400014: Cube.012
+    400016: Cube.013
+    400018: elmo
+    400020: Gamba
+    400022: Gamba avanti
+    400024: Gamba.001
+    400026: GambaDietroDown
+    400028: GambadietroUP
+    400030: GambaPiede
+    400032: GambaPiede.001
+    400034: Lancia
+    400036: scudo
+    400038: Testa
+    400040: Wheel
+    400042: Wheel.001
+    2300000: Barile
+    2300002: Body
+    2300004: Braccio
+    2300006: Cingolo
+    2300008: Coda
+    2300010: Cube.011
+    2300012: Cube.012
+    2300014: Cube.013
+    2300016: elmo
+    2300018: Gamba
+    2300020: Gamba avanti
+    2300022: Gamba.001
+    2300024: GambaDietroDown
+    2300026: GambadietroUP
+    2300028: GambaPiede
+    2300030: GambaPiede.001
+    2300032: Lancia
+    2300034: scudo
+    2300036: Testa
+    2300038: Wheel
+    2300040: Wheel.001
+    3300000: Barile
+    3300002: Body
+    3300004: Braccio
+    3300006: Cingolo
+    3300008: Coda
+    3300010: Cube.011
+    3300012: Cube.012
+    3300014: Cube.013
+    3300016: elmo
+    3300018: Gamba
+    3300020: Gamba avanti
+    3300022: Gamba.001
+    3300024: GambaDietroDown
+    3300026: GambadietroUP
+    3300028: GambaPiede
+    3300030: GambaPiede.001
+    3300032: Lancia
+    3300034: scudo
+    3300036: Testa
+    3300038: Wheel
+    3300040: Wheel.001
+    4300000: Gamba.001
+    4300002: GambaPiede.001
+    4300004: Lancia
+    4300006: scudo
+    4300008: Braccio
+    4300010: elmo
+    4300012: Body
+    4300014: GambaPiede
+    4300016: Gamba
+    4300018: Testa
+    4300020: Coda
+    4300022: Barile
+    4300024: Cube.013
+    4300026: Cube.012
+    4300028: Cube.011
+    4300030: Gamba avanti
+    4300032: GambadietroUP
+    4300034: Wheel
+    4300036: GambaDietroDown
+    4300038: Cingolo
+    4300040: Wheel.001
+    9500000: //RootNode
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 2
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  additionalBone: 0
+  userData: 
